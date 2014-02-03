@@ -6,7 +6,7 @@
 # Generic Makefile for oasis project
 
 # Set to setup.exe for the release
-SETUP := setup-dev.exe
+SETUP := ocaml setup.ml
 
 # Default rule
 default: build
@@ -23,40 +23,40 @@ setup.exe: setup.ml
 	ocamlopt.opt -o $@ $< || ocamlopt -o $@ $< || ocamlc -o $@ $<
 	rm -f setup.cmx setup.cmi setup.o setup.obj setup.cmo
 
-build: $(SETUP) setup.data
-	./$(SETUP) -build $(BUILDFLAGS)
+build: setup.data
+	$(SETUP) -build $(BUILDFLAGS)
 
-doc: $(SETUP) setup.data build
-	./$(SETUP) -doc $(DOCFLAGS)
+doc: setup.data build
+	$(SETUP) -doc $(DOCFLAGS)
 
-doc-api: $(SETUP) setup.data build
-	./$(SETUP) -build lwt-api.docdir/index.html
+doc-api: setup.data build
+	$(SETUP) -build lwt-api.docdir/index.html
 
-test: $(SETUP) setup.data build
-	./$(SETUP) -test $(TESTFLAGS)
+test: setup.data build
+	$(SETUP) -test $(TESTFLAGS)
 
-all: $(SETUP)
-	./$(SETUP) -all $(ALLFLAGS)
+all:
+	$(SETUP) -all $(ALLFLAGS)
 
-install: $(SETUP) setup.data
-	./$(SETUP) -install $(INSTALLFLAGS)
+install: setup.data
+	$(SETUP) -install $(INSTALLFLAGS)
 
-uninstall: $(SETUP) setup.data
-	./$(SETUP) -uninstall $(UNINSTALLFLAGS)
+uninstall: setup.data
+	$(SETUP) -uninstall $(UNINSTALLFLAGS)
 
-reinstall: $(SETUP) setup.data
-	./$(SETUP) -reinstall $(REINSTALLFLAGS)
+reinstall: setup.data
+	$(SETUP) -reinstall $(REINSTALLFLAGS)
 
-clean: $(SETUP)
-	./$(SETUP) -clean $(CLEANFLAGS)
+clean:
+	$(SETUP) -clean $(CLEANFLAGS)
 
-distclean: $(SETUP)
-	./$(SETUP) -distclean $(DISTCLEANFLAGS)
+distclean:
+	$(SETUP) -distclean $(DISTCLEANFLAGS)
 
-configure: $(SETUP)
-	./$(SETUP) -configure $(CONFIGUREFLAGS)
+configure:
+	$(SETUP) -configure $(CONFIGUREFLAGS)
 
-setup.data: $(SETUP)
-	./$(SETUP) -configure $(CONFIGUREFLAGS)
+setup.data:
+	$(SETUP) -configure $(CONFIGUREFLAGS)
 
 .PHONY: default build doc test all install uninstall reinstall clean distclean configure
