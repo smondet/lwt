@@ -348,9 +348,7 @@ Document "lwt-api"
     lwt.text,
     lwt.top,
     lwt.log,
-    lwt.unix,
-    lwt.syntax,
-    lwt.syntax.log
+    lwt.unix
 
 # +-------------------------------------------------------------------+
 # | Examples                                                          |
@@ -358,7 +356,7 @@ Document "lwt-api"
 
 Executable logging
   Path: examples/unix
-  Build$: flag(unix)
+  Build$: flag(syntax) && flag(unix)
   Install: false
   MainIs: logging.ml
   BuildDepends: lwt.unix, lwt.syntax
@@ -366,7 +364,7 @@ Executable logging
 
 Executable relay
   Path: examples/unix
-  Build$: flag(unix)
+  Build$: flag(syntax) && flag(unix)
   Install: false
   MainIs: relay.ml
   BuildDepends: lwt.unix, lwt.syntax
@@ -374,7 +372,7 @@ Executable relay
 
 Executable parallelize
   Path: examples/unix
-  Build$: flag(unix)
+  Build$: flag(syntax) && flag(unix)
   Install: false
   MainIs: parallelize.ml
   BuildDepends: lwt.unix, lwt.syntax
